@@ -2,30 +2,31 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qwen WebLLM Chatbot</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tiny Psybot — IA locale</title>
+  <link rel="stylesheet" href="./static/style.css" />
 </head>
 <body>
-  <div class="app">
+  <div class="app" role="application">
     <header>
       <div>
-        <p class="eyebrow">Tiny Psybot — WebLLM Qwen</p>
-        <h1>Chatbot local, 100% navigateur</h1>
-        <p class="subtitle">Aucune API — modèle chargé depuis Hugging Face.</p>
+        <p class="eyebrow">Tiny Psybot — IA locale</p>
+        <h1>WebLLM + Qwen2.5-0.5B-Instruct-q0f32-MLC</h1>
+        <p class="subtitle">Chat 100% navigateur, modèle chargé depuis <code>/models/qwen</code>.</p>
       </div>
-      <div id="model-status" class="status">Initialisation…</div>
+      <div id="model-status" class="status" aria-live="polite">Prêt à charger…</div>
     </header>
 
-    <main id="chat" aria-live="polite"></main>
+    <main id="chat" aria-live="polite" aria-label="Fil de discussion"></main>
 
     <form id="composer" autocomplete="off">
       <label class="sr-only" for="message-input">Votre message</label>
-      <input id="message-input" name="message" placeholder="Écrire ici…" required />
+      <input id="message-input" name="message" placeholder="Écrire un message…" required />
       <button id="send" type="submit">Envoyer</button>
     </form>
   </div>
 
-  <script type="module" src="script.js"></script>
+  <script src="./webllm.min.js"></script>
+  <script type="module" src="./static/app.js"></script>
 </body>
 </html>
