@@ -1,0 +1,50 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: 17
+
+    - name: Install deps
+      run: |
+        npm install
+        npm install @capacitor/core @capacitor/cli @capacitor/android
+
+    - name: Init Capacitor (if missing)
+      run: |
+        if [ ! -f capacitor.config.json ]; then
+          npx cap init myapp fr.cybertherapie.app --web-dir=.
+        fi
+
+    - name: Add Android (if missing)
+      run: |
+        if [ ! -d android ]; then
+          npx cap add android
+        fi
+
+    - name: Build APK
+      run: |
+        npx cap sync android
+        cd android
+        chmod +x gradlew
+        ./gradlew assembleDebug
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: apk
+        path: android/app/build/outputs/apk/debug/app-debug.apk
