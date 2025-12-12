@@ -1,0 +1,9 @@
+{
+  "name": "TinyBot",
+  "short_name": "TinyBot",
+  "start_url": "/tinybot/index.html",
+  "scope": "/tinybot/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000"
+}
